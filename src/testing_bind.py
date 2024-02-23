@@ -39,10 +39,10 @@ class Device:
         start_time = time.time()#---------Start timing now
 
         for _ in range(1):
-            #_read_out1 = self.OpenOCDSession.Exec("bp", "0x8003010", "2", "hw")
-            #_read_out2 = self.OpenOCDSession.Exec("rbp", "0x8003010")
-            _read_out1 = self.OpenOCDSession.Exec("flash write_image", "erase", "/home/realtime/Documents/Part_D_Modules/Individual_Project/EmbeddedNNAccuracyTest/elfFiles/Mag_Acc_Dataset_EKF_M7_Cksm.elf", "0x0", "elf")
-            _read_out2 = self.OpenOCDSession.Exec("flash verify_image", "/home/realtime/Documents/Part_D_Modules/Individual_Project/EmbeddedNNAccuracyTest/elfFiles/Mag_Acc_Dataset_EKF_M7_Cksm.elf", "0x0", "elf")
+            _read_out1 = self.OpenOCDSession.Exec("bp", "0x8003010", "2", "hw")
+            _read_out2 = self.OpenOCDSession.Exec("rbp", "0x8003010")
+            #_read_out1 = self.OpenOCDSession.Exec("flash write_image", "erase", "/home/realtime/Documents/Part_D_Modules/Individual_Project/EmbeddedNNAccuracyTest/elfFiles/Mag_Acc_Dataset_EKF_M7_Cksm.elf", "0x0", "elf")
+            #_read_out2 = self.OpenOCDSession.Exec("flash verify_image", "/home/realtime/Documents/Part_D_Modules/Individual_Project/EmbeddedNNAccuracyTest/elfFiles/Mag_Acc_Dataset_EKF_M7_Cksm.elf", "0x0", "elf")
 
         end_time = time.time()#------------End timing now
         print(f'Readout1: {_read_out1}')

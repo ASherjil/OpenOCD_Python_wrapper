@@ -33,45 +33,12 @@ class OpenOCD:
     #
     def Readout(self):
         return self.tn.Readout()
-        #s = ''
-        #Lines = []
-        #while True:
-        #    # Assuming read_some returns a list of integers representing byte values
-        #    byte_data = self.tn.read_some()  # This would be a list of integers
-        #    try:
-        #        chunk = bytearray(byte_data).decode('UTF-8')
-        #    except UnicodeDecodeError:
-        #        # Handle potential decoding errors if byte_data contains non-UTF-8 sequences
-        #        chunk = bytearray(byte_data).decode('UTF-8', errors='replace')
-#
-        #    s += chunk
-        #    print(f'Current chunk: {chunk}')
-        #    l = s.splitlines()
-        #    if len(l) > 1:
-        #        for line in l[:-1]:
-        #            if len(line) > 0:
-        #                Lines.append(line)
-        #        s = l[-1]
-        #    print(f'Lines: {Lines}')
-        #    print(f'Sum chunks: {s}')
-        #    if s == '> ':
-        #        # Filter out any null characters before returning
-        #        Lines = [line.replace('\x00', '') for line in Lines]
-        #        return Lines
-
 
     def Exec(self, Cmd, *args):
-        Text = Cmd
-        for arg in args:
-            if arg:
-                Text += ' ' + arg
-        Text += '\n'
-        self.tn.write(bytearray(Text, 'UTF-8'))
-        return self.Readout()
-        # Since *args is a tuple, convert it to a list to match the expected py::list in C++
-        #args_list = list(args)
-        ## Call C++ Exec function directly with Cmd and the converted list of arguments
-        #return self.tn.Exec(Cmd, args_list)
+        #Since *args is a tuple, convert it to a list to match the expected py::list in C++
+        args_list = list(args)
+        # Call C++ Exec function directly with Cmd and the converted list of arguments
+        return self.tn.Exec(Cmd, args_list)
 
     
     # Currently there is no implementation of read_eager in the C++ version 

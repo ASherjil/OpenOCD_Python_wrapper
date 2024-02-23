@@ -54,7 +54,9 @@ std::vector<std::string> TelnetlibCpp::Readout() {
                 std::string line(s.begin() + start_pos, s.begin() + pos);
                 line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
                 line.erase(std::remove(line.begin(), line.end(), '\x00'), line.end());
-                lines.push_back(std::move(line)); // Use move semantics to avoid copying
+                
+                if (line.size())
+                    lines.push_back(std::move(line)); // Use move semantics to avoid copying
             }
             start_pos = pos + 1;
         }
