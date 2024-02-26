@@ -41,9 +41,7 @@ std::vector<std::string> TelnetlibCpp::Readout() {
 
     while (true) {
         std::vector<std::uint8_t> byte_data = read_some();
-        const char* begin = reinterpret_cast<const char*>(byte_data.data());
-        const char* end = begin + byte_data.size();
-        std::string chunk = boost::locale::conv::to_utf<char>(begin, end, "UTF-8");
+        std::string chunk(byte_data.begin(), byte_data.end());
 
         s += chunk;
 
@@ -115,13 +113,13 @@ std::vector<std::string> TelnetlibCpp::Exec(const std::string& cmd, const std::v
             text += ' ' + arg;
         }
     }
-    text += '\n'; // Append newline character
+    text += '\n';
 
-    // Convert the string to a vector of std::uint8_t
-    std::vector<std::uint8_t> data(text.begin(), text.end());
-
-    // Write the command
-    write(data);
+    // write(Cmd), write directly to avoid unnecessary conversions 
+    telnetpp::bytes byte_data(reinterpret_cast<const std::uint8_t*>(text.data()), text.size());
+    telnetpp::element elem = byte_data;
+    telnet_session_.write(elem); 
+    //-----------------------------------------------------------------------------------------
 
     // Read and return the output
     return Readout();

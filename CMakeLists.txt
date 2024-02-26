@@ -23,8 +23,6 @@ find_package(Boost REQUIRED COMPONENTS container locale)
 find_package(serverpp REQUIRED)
 find_package(telnetpp 3.0.0 REQUIRED)
 find_package(gsl-lite REQUIRED)
-find_package(ZLIB REQUIRED)
-find_package(Threads REQUIRED)
 
 # Source files including the Pybind11 binding file
 set(SOURCE_FILES
